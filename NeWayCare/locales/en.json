@@ -38,6 +38,8 @@
       "notes": "Notes"
     },
     "videos":{
+      "add":"Add",
+      "remove":"Remove",
       "uploadTitle":"Please upload 4 videos",
       "loadingMsg": "Loading videos from server.."
     },

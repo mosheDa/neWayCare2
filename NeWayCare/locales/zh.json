@@ -38,6 +38,8 @@
       "notes": "笔记"
     },
     "videos":{
+      "add":"加",
+      "remove":"去掉",
       "uploadTitle": "请上传4个视频",
       "loadingMsg": "从服务器加载视频.."
     },

@@ -9,7 +9,7 @@ import Results from './Components/results';
 import Settings from './Components/settings';
 import { strings } from './locales/i18n';
 import I18n from 'react-native-i18n';
-import {Icon} from 'native-base';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 import { createDrawerNavigator } from 'react-navigation';
 
@@ -30,7 +30,7 @@ export default class App extends React.Component {
         screen: Settings,
         navigationOptions: {
           title:strings('labels.settings'),
-          drawerIcon: <Icon name="settings"/>
+          drawerIcon: <Icon name="md-settings"/>
         }
       },
       Home: {
@@ -55,6 +55,7 @@ export default class App extends React.Component {
         screen: Login,
         navigationOptions: {
           drawerLabel: strings('labels.logout'),
+          drawerIcon: <Icon name="md-log-out"/>
         }
       },
       Splash: {

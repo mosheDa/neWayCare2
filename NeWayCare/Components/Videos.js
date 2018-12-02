@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, AsyncStorage, ScrollView} from 'react-native';
+import { StyleSheet, View, AsyncStorage, ScrollView } from 'react-native';
 import axios from 'axios';
 import {cloud_name, api_key, api_secret} from '../cloudinaryDetails.js'
 import base64 from 'react-native-base64'
@@ -8,7 +8,14 @@ import AddVideo from "./AddVideo"
 import { Container, Header, Button, Icon, Right, Left, Spinner, Body, Content, Text} from 'native-base';
 import { strings } from '../locales/i18n';
 import Modal from "react-native-modal";
-import Video from 'react-native-video';
+import Icon2 from 'react-native-vector-icons/MaterialIcons';
+// import Video from 'react-native-video';
+// import Video from 'react-native-video-player';
+import VideoPlayer from 'react-native-video-controls';
+// import CircleButton from 'react-native-circle-button';
+import ActionButton from 'react-native-action-button';
+
+
 
 export default class Videos extends React.Component {
 
@@ -83,9 +90,9 @@ export default class Videos extends React.Component {
     return (
       <Container>
         <Header>
-        <Button onPress={this.openModal.bind(this)}>
+        {/* <Button onPress={this.openModal.bind(this)}>
             <Text>open me!</Text>
-          </Button>        
+          </Button>         */}
           <Body style={{alignItems: "center"}}>
             <Text style={{color: "white", fontSize:20}}>{strings('labels.videos')}</Text>
           </Body>
@@ -97,21 +104,33 @@ export default class Videos extends React.Component {
           <Text style={{justifyContent:"center", alignSelf:"center"}}>{strings('videos.uploadTitle')}</Text>
           {videoDetails &&
           <Modal backdropColor="white" isVisible={isModalVisible}>
-            <Video source={{uri: videoDetails.uri}}   // Can be a URL or a local file.
-              ref={(ref) => {
-                this.player = ref
-              }}                                      // Store reference
-              onBuffer={this.onBuffer}                // Callback when remote video is buffering
-              onError={this.videoError}               // Callback when video cannot be loaded
-              style={styles.backgroundVideo} />
-            <Button onPress={this.closeModal.bind(this)}>
-              <Text>Cancel</Text>
-            </Button>
-            <Button onPress={()=>{
-              navigation.navigate('Details', {video: videoDetails})}
-            }>
-              <Text>upload</Text>
-            </Button>
+          <VideoPlayer
+            source={{ uri: videoDetails.uri }}
+            onBack={this.closeModal.bind(this)}
+        />
+
+         <ActionButton    buttonColor={"orange"}>
+         <ActionButton.Item buttonColor='green' title={strings('videos.add')} onPress={()=>{navigation.navigate('Details', {video: videoDetails})}}>
+            <Icon name="md-cloud-upload"/>
+          </ActionButton.Item>
+          <ActionButton.Item buttonColor='red' title={strings('videos.remove')} onPress={this.closeModal.bind(this)}>
+            <Icon name="md-remove-circle"  />
+          </ActionButton.Item>
+          
+          </ActionButton>
+        
+          
+            {/* <CircleButton size={45} 
+            primaryColor={}
+            onPressButtonLeft={this.closeModal.bind(this)} 
+            onPressButtonRight={()=>{navigation.navigate('Details', {video: videoDetails})}}
+             iconButtonTop={ {}}
+             iconButtonRight={ require("../assets/images/upload.png")}
+             iconButtonLeft={ require("../assets/images/close.png")}
+
+             iconButtonBottom={ {}}/> */}
+         
+      
         </Modal>}
           <ScrollView>
            {
@@ -132,6 +151,17 @@ export default class Videos extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  submit:{
+    marginRight:40,
+    marginLeft:40,
+    marginTop:10,
+    paddingTop:20,
+    paddingBottom:20,
+    backgroundColor:'#68a0cf',
+    borderRadius:10,
+    borderWidth: 1,
+    borderColor: '#fff'
+  },
   backgroundVideo: {
     position: 'absolute',
     top: 0,
