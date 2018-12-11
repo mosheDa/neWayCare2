@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, AsyncStorage, ScrollView } from 'react-native';
+import { StyleSheet, View, AsyncStorage, ScrollView, RefreshControl } from 'react-native';
 import axios from 'axios';
 import {api_key, api_secret} from '../cloudinaryDetails.js'
 import base64 from 'react-native-base64'
@@ -14,7 +14,7 @@ import Header from './Header';
 
 export default class Videos extends React.Component {
 
-  state = { videos: [] , isLoaded: false, results: false, userData:"a", isModalVisible: false, navigation:this.props.navigation};
+  state = { videos: [] , isLoading: true, results: false, userData:"a", isModalVisible: false, navigation:this.props.navigation};
 
   componentDidMount() {
     AsyncStorage.getItem('userData', (err, userData) => {
@@ -51,7 +51,7 @@ export default class Videos extends React.Component {
     console.log(url)
     axios.get(url, {headers : { 'Authorization' : Basic }})
           .then(res => {
-              this.setState({ videos: res.data.resources, isLoading: true});
+              this.setState({ videos: res.data.resources, isLoading: false});
           })
           .catch(err =>{
             console.log(err.response)
@@ -85,8 +85,8 @@ export default class Videos extends React.Component {
     return (
       <Container>
         <Header navigation={this.props.navigation} title={strings('labels.videos')}/>
-        {this.state.isLoading ?
-        <Content>
+        {!this.state.isLoading ?
+        <View>
          
           <Text style={{justifyContent:"center", alignSelf:"center"}}>{strings('videos.uploadTitle')}</Text>
           {videoDetails &&
@@ -119,19 +119,25 @@ export default class Videos extends React.Component {
          
       
         </Modal>}
-          <ScrollView>
+          <ScrollView
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.isLoading}
+              onRefresh={this.getVideos.bind(this)}
+            />
+          }>
            {
                 videos.map((video, index) => <VideoCard navigation={(item, bla) => this.props.navigation.navigate(item, bla)} video={video} key={index} removeVideo={(item) => this.removeVideo(item)}/>)
             }
           </ScrollView>
-        </Content>
+        </View>
         :
         <Body style={{alignContent:"center", justifyContent:"center"}}>
             <Spinner color='blue'/>
             <Text>{strings('videos.loadingMsg')}</Text>
           </Body>}
-
-           { videos.length < 4 && this.state.isLoading &&  <AddVideo addVideo={(item) => this.addVideo(item)}/>} 
+  
+           { videos.length < 4 && !this.state.isLoading &&  <AddVideo addVideo={(item) => this.addVideo(item)}/>} 
       </Container>
     );
   }
