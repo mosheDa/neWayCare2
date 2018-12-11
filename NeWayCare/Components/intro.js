@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     height: 320,
   },
   text: {
-    
+    textAlign: 'left',
   },
 });
  

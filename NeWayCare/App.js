@@ -1,5 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, AsyncStorage} from 'react-native';
+import { AsyncStorage} from 'react-native';
+// import { Icon} from 'react-native';
+
 import Videos from './Components/Videos';
 import Intro from './Components/intro';
 import Splash from './Components/splash';
@@ -9,7 +11,7 @@ import Results from './Components/results';
 import Settings from './Components/settings';
 import { strings } from './locales/i18n';
 import I18n from 'react-native-i18n';
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { createDrawerNavigator } from 'react-navigation';
 
@@ -26,13 +28,6 @@ export default class App extends React.Component {
    
   render() {
     RootStack = createDrawerNavigator({
-      Settings: {
-        screen: Settings,
-        navigationOptions: {
-          title:strings('labels.settings'),
-          drawerIcon: <Icon name="md-settings"/>
-        }
-      },
       Home: {
         screen: Videos,
         navigationOptions: {
@@ -51,13 +46,6 @@ export default class App extends React.Component {
           drawerLabel: strings('labels.intro'),
         }
       },
-      Logout: {
-        screen: Login,
-        navigationOptions: {
-          drawerLabel: strings('labels.logout'),
-          drawerIcon: <Icon name="md-log-out"/>
-        }
-      },
       Splash: {
         screen: Splash,
         navigationOptions: {
@@ -70,6 +58,19 @@ export default class App extends React.Component {
           drawerLabel: () => {},
         }
       },
+      Settings: {
+        screen: Settings,
+        navigationOptions: {
+          drawerLabel: () => {},
+        }
+      },
+      Logout: {
+        screen: Login,
+        navigationOptions: {
+          // drawerIcon: <Icon size={20} name="logout"/>,
+          drawerLabel:  strings('labels.logout'),
+        }
+      },
       Login: {
         screen: Login,
         navigationOptions: {
@@ -78,6 +79,7 @@ export default class App extends React.Component {
       },
     },
     {
+      backBehavior:'Home',
       initialRouteName: 'Splash',
     },
     )

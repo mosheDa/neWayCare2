@@ -1,8 +1,8 @@
 import React from 'react';
-import { StyleSheet, View,BackHandler } from 'react-native';
-import axios from 'axios'; // 0.18.0
-import { Container, Content, Textarea,Header, Form, Label,Right,Input, Card, CardItem, Body, Button, Icon, Text} from "native-base";
+import { StyleSheet,BackHandler } from 'react-native';
+import { Container, Content, Card, CardItem, Body, Text} from "native-base";
 import { strings } from '../locales/i18n';
+import Header from "./Header" 
 
 export default class Videos extends React.Component {
   constructor(props) {
@@ -34,16 +34,9 @@ export default class Videos extends React.Component {
   }
 
   render() {
-    let {fileds} = this.state
-
     return (
       <Container>
-        <Header>
-        <Body style={{alignItems: "center"}}>
-            <Text style={{color: "white", fontSize:20}}>{strings('labels.results')}</Text>
-          </Body>
-          <Icon name="menu" onPress={() => this.props.navigation.toggleDrawer()} style={{color:"white", top:15, right: 15}}/>
-        </Header>
+          <Header navigation={this.props.navigation} title={strings('labels.results')}/>
             <Content style={{top: 150}}>
             <Card>
                 <CardItem>

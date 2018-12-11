@@ -1,8 +1,9 @@
 import React from 'react';
-import { StyleSheet, View, AsyncStorage, ScrollView, Button} from 'react-native';
-import { Container, Content, Picker, Text, Header, Body, Icon } from 'native-base';
+import { StyleSheet, Button} from 'react-native';
+import { Container, Content, Picker, Text } from 'native-base';
 import { strings, switchLanguage } from '../locales/i18n';
 import I18n from 'react-native-i18n';
+import Header from './Header';
 
 const styles = StyleSheet.create({
   image: {
@@ -23,12 +24,7 @@ export default class Settings extends React.Component {
     render() {
     return (
         <Container>
-        <Header>
-        <Body style={{alignItems: "center"}}>
-            <Text style={{color: "white", fontSize:20}}>{strings('labels.settings')}</Text>
-          </Body>
-          <Icon name="menu" onPress={() => this.props.navigation.toggleDrawer()} style={{color:"white", top:15, right: 15}}/>
-        </Header>
+        <Header home={true} navigation={this.props.navigation} title={strings('labels.settings')}/>
         <Content>
             <Text> {strings('settings.selectLanguage')}</Text>
             <Picker

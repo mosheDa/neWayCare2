@@ -12,7 +12,7 @@
     },
     "intro": {
       "title": "Instructions" ,
-      "text" : "The goal of this application is to record short movie of the child in order to analyze his symptoms. \nRecording instructions: \n1 In at least 60 seconds of the movie the recording should be in distance of 20 cm, the frame should contain the whole face and facial expressions and eyes movement should be seen clearly.\n2 Another at least one minute of the movie should be recording in distance of 1 meter when the baby lies on his/her back. the frame should contain the whole body"
+      "text" : "The goal of this application is to record short movie of the child in order to analyze his symptoms. \n\n\nRecording instructions: \n1 In at least 1 minute of the movie the recording should be in distance of 20 cm, the frame should contain the whole face and facial expressions and eyes movement should be seen clearly.\n2 Another at least one minute of the movie should be recording in distance of 1 meter when the baby lies on his/her back. the frame should contain the whole body"
       ,"finishBtn": "Finish"
     },
     "addVideo": {

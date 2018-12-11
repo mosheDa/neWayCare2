@@ -1,21 +1,16 @@
 import React from 'react';
 import { StyleSheet, View, AsyncStorage, ScrollView } from 'react-native';
 import axios from 'axios';
-import {cloud_name, api_key, api_secret} from '../cloudinaryDetails.js'
+import {api_key, api_secret} from '../cloudinaryDetails.js'
 import base64 from 'react-native-base64'
 import VideoCard from "./VideoCard"
 import AddVideo from "./AddVideo"
-import { Container, Header, Button, Icon, Right, Left, Spinner, Body, Content, Text} from 'native-base';
+import { Container, Icon, Spinner, Body, Content, Text} from 'native-base';
 import { strings } from '../locales/i18n';
 import Modal from "react-native-modal";
-import Icon2 from 'react-native-vector-icons/MaterialIcons';
-// import Video from 'react-native-video';
-// import Video from 'react-native-video-player';
 import VideoPlayer from 'react-native-video-controls';
-// import CircleButton from 'react-native-circle-button';
 import ActionButton from 'react-native-action-button';
-
-
+import Header from './Header';
 
 export default class Videos extends React.Component {
 
@@ -89,15 +84,7 @@ export default class Videos extends React.Component {
 
     return (
       <Container>
-        <Header>
-        {/* <Button onPress={this.openModal.bind(this)}>
-            <Text>open me!</Text>
-          </Button>         */}
-          <Body style={{alignItems: "center"}}>
-            <Text style={{color: "white", fontSize:20}}>{strings('labels.videos')}</Text>
-          </Body>
-          <Icon name="menu" onPress={() => this.props.navigation.toggleDrawer()} style={{color:"white", top:15, right: 15}}/>
-        </Header>
+        <Header navigation={this.props.navigation} title={strings('labels.videos')}/>
         {this.state.isLoading ?
         <Content>
          

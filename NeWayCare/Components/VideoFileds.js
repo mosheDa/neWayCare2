@@ -1,10 +1,10 @@
 import React from 'react';
-import { StyleSheet, Text, View , Modal, AsyncStorage, ImageBackground, Linking, BackHandler, Picker, TextInput, Alert} from 'react-native';
+import { StyleSheet, Text, View , Modal, AsyncStorage, ImageBackground, Linking, BackHandler, Picker, TextInput} from 'react-native';
 import axios from 'axios';
 import CryptoJS from 'crypto-js';
 import {url, api_key, api_secret} from '../cloudinaryDetails.js'
 import Pie from 'react-native-progress/Pie'
-import { Container, Content, Textarea,Header, Form, Label,Right,Input, Card, CardItem, Body, Button, Icon, Left} from "native-base";
+import { Container, Content, Textarea,Header, Form, Label,Input, Card, CardItem, Body, Button, Icon} from "native-base";
 // import SnackBar from 'react-native-snackbar-dialog'
 import { strings } from '../locales/i18n';
 
@@ -16,6 +16,7 @@ export default class Videos extends React.Component {
   }
 
   state = {
+    showUploadBtn:true,
     videoInfo:"",
     video:{},
     circylePercent:0, 
@@ -37,6 +38,7 @@ export default class Videos extends React.Component {
   }
 
   uploadVideo() {
+    this.setState({showUploadBtn:false})
     let data = {age: this.state.age, videoInfo: this.state.videoInfo, ageKind: this.state.ageKind, videoName: this.state.video.name}
     let timestamp = (Date.now() / 1000 | 0).toString();
     // let hash_string = 'context=key=a&timestamp=' + timestamp + api_secret --> upload with key value
@@ -146,9 +148,9 @@ export default class Videos extends React.Component {
             </CardItem>
          </Card>
       </Content>
-      {!this.state.video.url && <Button transparent large success style={{justifyContent:"center", alignSelf:"center", width: 250}} onPress={() => this.uploadVideo()}>
+      {(!this.state.video.url&& this.state.age  && this.state.showUploadBtn ) ?<Button transparent large success style={{justifyContent:"center", alignSelf:"center", width: 250}} onPress={() => this.uploadVideo() }>
         <Icon name="md-cloud-upload" style={{fontSize:50}}/>
-      </Button>}
+      </Button>:null}
       <Modal
       animationType="slide"
       transparent={true}
